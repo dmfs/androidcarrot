@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import org.dmfs.android.carrot.bindings.AndroidBindings;
 import org.dmfs.android.carrot.bindings.IntentBindings;
-import org.dmfs.android.carrot.locators.RawResourceLocater;
+import org.dmfs.android.carrot.locaters.RawResourceLocater;
 
 import au.com.codeka.carrot.CarrotEngine;
 import au.com.codeka.carrot.CarrotException;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.dmfs.android.carrot.locators;
+package org.dmfs.android.carrot.locaters;
 
 import android.content.Context;
 import android.content.res.Resources;
