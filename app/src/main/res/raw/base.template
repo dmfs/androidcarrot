@@ -1,0 +1,8 @@
+{% block "head" %}{% end %}
+==================
+
+{% block "main" %}{% end %}
+
+---
+
+{% block "footer" %}{% end %}

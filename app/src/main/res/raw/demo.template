@@ -1,0 +1,29 @@
+{% extends "base" %}
+
+{% block "head" %}Welcome to the app "{{ $app.title }}" version {{ $app.version }}.{% end %}
+
+{% block "main" %}
+You're running on a {{ $device.manufacturer }} {{ $device.model }} version {{ $device.version }}.
+
+The "app_name" string has the value "{{ $string.app_name }}"
+
+Your configured language is {{ $locale.language }} {% if $locale.language!=$locale.language_en %}({{ $locale.language_en }}){% end %}
+
+You can access shared preferences like this: {{ $prefs.nodots.key1 }}
+
+Of course you can calculate with preferences <int1> + 1 = {{ $prefs.nodots.int1 + 1 }}
+
+Or like this: {{ $prefs["name.with special+chars"].key2 }}
+
+This activity was called with:
+Action: {{ $intent.action }}
+Extras: {% for key, value in $intent.extras %}{{ key }}
+{% else %}None{% end %}
+Categories: {% for category in $intent.categories %}{{ category }}{% if not loop.last %},{% end %}{% else %}None{% end %}
+Data: {% if $intent.data %}{{ $intent.data }}{% else %}None{% end %}
+{% end %}
+
+{% block "footer" %}
+brought to you by dmfs
+{% end %}
+
