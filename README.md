@@ -1,10 +1,12 @@
 # Android Carrot Bindings
 
-`Bindings` for [carrot](/codeka/carrot) on Android.
+`Bindings` for [carrot](https://github.com/codeka/carrot) on Android.
  
 ## Examples
 
 By adding `AndroidBindings` to your template `Bindings` you can access a bunch of app and system values.
+
+Note you can use all these `Bindings` separaretly as well. When using `AndroidBindings` their keys are prefixed with `$xxx` as seen below.
 
 ### provided by `AppBindings`
 
@@ -64,9 +66,9 @@ e.g.:
 {{ $locale.code }}  : renders the language tag of the current locale, e.g. `en-US`
 ```
 
-## More Bindings
+## Additional Bindings
 
-In addition this library provides a few more Bindings for other purposes:
+In addition this library provides a few more Bindings for other purposes.
 
 ### `BundleBindings`
 
