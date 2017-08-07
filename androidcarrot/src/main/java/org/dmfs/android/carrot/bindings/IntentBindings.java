@@ -35,7 +35,7 @@ public final class IntentBindings implements Bindings
                 return mIntent.getDataString();
             case "extras":
                 Bundle extras = mIntent.getExtras();
-                return extras == null ? new BundleBindings(Bundle.EMPTY) : new BundleBindings(extras);
+                return extras == null ? new EmptyBindings() : new BundleBindings(extras);
             case "categories":
                 return mIntent.getCategories();
             default:

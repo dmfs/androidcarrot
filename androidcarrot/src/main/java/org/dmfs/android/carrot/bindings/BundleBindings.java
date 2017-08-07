@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import org.dmfs.iterators.Function;
 import org.dmfs.iterators.decorators.Mapped;
 
-import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -52,12 +51,19 @@ public final class BundleBindings implements Bindings, Iterable<EntryBindings>
             @Override
             public EntryBindings apply(String argument)
             {
-                return new EntryBindings(new AbstractMap.SimpleImmutableEntry<>(argument, decoratedValue(argument)));
+                return new EntryBindings(argument, decoratedValue(argument));
             }
         });
     }
 
 
+    /**
+     * Decorate the value of the given key if it's a nested Bundle.
+     *
+     * @param key
+     *
+     * @return
+     */
     private Object decoratedValue(String key)
     {
         Object result = mBundle.get(key);

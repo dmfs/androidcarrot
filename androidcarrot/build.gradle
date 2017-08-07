@@ -23,7 +23,7 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile('com.github.codeka:carrot:52accfd7053ab34c50ab4ba5c2cf102b405d176d',
+    compile('com.github.dmfs:carrot:5296969428e2e8a1f8aa00b46be64c27fc4362a4',
             { exclude group: 'com.google.code.findbugs' })
     compile 'org.dmfs:iterators:1.5'
     testCompile 'junit:junit:4.12'
