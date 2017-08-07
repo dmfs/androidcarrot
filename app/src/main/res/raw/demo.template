@@ -9,6 +9,8 @@ A {% if $device.sdk_level >= $R.integer.lollipop %}Lollipop or newer{% else %}pr
 
 The "app_name" string has the value "{{ $R.string.app_name }}"
 
+Test "{{ $R.string.xyz or "Nope" }}"
+
 Your configured language is {{ $locale.language }} {% if $locale.language!=$locale.language_en %}({{ $locale.language_en }}){% end %}
 
 You can access shared preferences like this: {{ $prefs.nodots.key1 }}
@@ -25,6 +27,12 @@ Categories: {% for category in $intent.categories %}{{ category }}{% if not loop
 Data: {% if $intent.data %}{{ $intent.data }}{% else %}None{% end %}
 
 R.integer.forty_two + 1: {{ $R.integer.forty_two +1 }}
+
+Contact names:
+
+{% for contact in $contacts %}{{ contact.display_name }}
+{% end %}
+
 {% end %}
 
 

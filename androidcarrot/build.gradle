@@ -26,5 +26,6 @@ dependencies {
     compile('com.github.dmfs:carrot:5296969428e2e8a1f8aa00b46be64c27fc4362a4',
             { exclude group: 'com.google.code.findbugs' })
     compile 'org.dmfs:iterators:1.5'
+    compile 'com.github.dmfs.ContentPal:contentpal:-SNAPSHOT'
     testCompile 'junit:junit:4.12'
 }

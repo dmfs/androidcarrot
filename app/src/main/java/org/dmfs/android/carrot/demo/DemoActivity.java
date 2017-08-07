@@ -1,13 +1,20 @@
 package org.dmfs.android.carrot.demo;
 
+import android.Manifest;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import org.dmfs.android.carrot.bindings.AndroidBindings;
 import org.dmfs.android.carrot.bindings.IntentBindings;
+import org.dmfs.android.carrot.bindings.contentpal.Bound;
+import org.dmfs.android.carrot.demo.permissions.BasicAppPermissions;
+import org.dmfs.android.carrot.demo.permissions.Permission;
 import org.dmfs.android.carrot.locaters.RawResourceLocater;
+import org.dmfs.android.contentpal.rowsets.AllRows;
+import org.dmfs.android.contentpal.views.BaseView;
 
 import au.com.codeka.carrot.CarrotEngine;
 import au.com.codeka.carrot.CarrotException;
@@ -23,6 +30,12 @@ public class DemoActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Permission permission = new BasicAppPermissions(this).forName(Manifest.permission.READ_CONTACTS);
+        if (!permission.isGranted())
+        {
+            permission.request().send(this);
+        }
+
         setContentView(R.layout.activity_demo);
 
         getSharedPreferences("nodots", 0).edit().putString("key1", "value1").putInt("int1", 1).apply();
@@ -41,6 +54,10 @@ public class DemoActivity extends AppCompatActivity
         {
             String templateName = String.valueOf(R.raw.demo);
             String output = engine.process(templateName, new Composite(
+                    new SingletonBindings("$contacts",
+                            // bind an iterable of all contacts in the database
+                            new Bound(new AllRows<>(new BaseView<ContactsContract.Contacts>(this.getContentResolver().acquireContentProviderClient(
+                                    ContactsContract.AUTHORITY_URI), ContactsContract.Contacts.CONTENT_URI)))),
                     new AndroidBindings(this),
                     new SingletonBindings("$intent", new IntentBindings(getIntent()))
             ));
