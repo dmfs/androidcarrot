@@ -15,11 +15,19 @@ import org.dmfs.android.carrot.demo.permissions.Permission;
 import org.dmfs.android.carrot.locaters.RawResourceLocater;
 import org.dmfs.android.contentpal.rowsets.AllRows;
 import org.dmfs.android.contentpal.views.BaseView;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import au.com.codeka.carrot.CarrotEngine;
 import au.com.codeka.carrot.CarrotException;
 import au.com.codeka.carrot.Configuration;
 import au.com.codeka.carrot.bindings.Composite;
+import au.com.codeka.carrot.bindings.JsonObjectBindings;
 import au.com.codeka.carrot.bindings.SingletonBindings;
 
 
@@ -45,7 +53,7 @@ public class DemoActivity extends AppCompatActivity
     }
 
 
-    public void click(View view)
+    public void click(View view) throws IOException, JSONException
     {
         CarrotEngine engine = new CarrotEngine();
         Configuration config = engine.getConfig();
@@ -54,6 +62,9 @@ public class DemoActivity extends AppCompatActivity
         {
             String templateName = String.valueOf(R.raw.demo);
             String output = engine.process(templateName, new Composite(
+                    new JsonObjectBindings(new JSONObject(fromInputStream(getResources().openRawResource(R.raw.dependencies)))),
+                    new SingletonBindings("$licenses",
+                            new JsonObjectBindings(new JSONObject(fromInputStream(getResources().openRawResource(R.raw.licenses))))),
                     new SingletonBindings("$contacts",
                             // bind an iterable of all contacts in the database
                             new Bound(new AllRows<>(new BaseView<ContactsContract.Contacts>(this.getContentResolver().acquireContentProviderClient(
@@ -67,5 +78,18 @@ public class DemoActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
+    }
+
+
+    private String fromInputStream(InputStream in) throws IOException
+    {
+        BufferedReader r = new BufferedReader(new InputStreamReader(in));
+        StringBuilder total = new StringBuilder();
+        String line;
+        while ((line = r.readLine()) != null)
+        {
+            total.append(line).append('\n');
+        }
+        return total.toString();
     }
 }

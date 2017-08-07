@@ -33,6 +33,17 @@ Contact names:
 {% for contact in $contacts %}{{ contact.display_name }}
 {% end %}
 
+<ul>
+{% for dependency in dependencies %}<li><a href="{{ dependency.url }}">{{ dependency.name }}</a><br />
+<a href="{{ $licenses[dependency.license].url }}">{{ $licenses[dependency.license].name }}</a>{{ dependency.copyright }}<br />
+<pre>
+{{ dependency.notes }}
+</pre>
+</li>
+{% end %}
+</ul>
+
+
 {% end %}
 
 
