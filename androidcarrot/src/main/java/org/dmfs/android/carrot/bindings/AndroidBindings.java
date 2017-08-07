@@ -22,7 +22,12 @@ public final class AndroidBindings implements Bindings
     {
         mDelegate = new Composite(
                 new SingletonBindings("$app", new AppBindings(context)),
-                new SingletonBindings("$string", new StringBinding(context)),
+                new SingletonBindings("$R",
+                        new Composite(
+                                new SingletonBindings("string", new StringResourceBindings(context)),
+                                new SingletonBindings("integer", new IntegerResourceBindings(context))
+                        )
+                ),
                 new SingletonBindings("$prefs", new AppPreferencesBindings(context)),
                 new SingletonBindings("$locale", new LocaleBindings()),
                 new SingletonBindings("$device", new DeviceBindings())

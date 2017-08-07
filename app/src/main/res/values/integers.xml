@@ -1,0 +1,4 @@
+<resources>
+    <integer name="forty_two">42</integer>
+    <integer name="lollipop">21</integer>
+</resources>

@@ -2,13 +2,13 @@
 
 `Bindings` for [carrot](https://github.com/codeka/carrot) on Android.
  
-## Examples
+## `AndroidBindings`
 
 By adding `AndroidBindings` to your template `Bindings` you can access a bunch of app and system values.
 
-Note you can use all these `Bindings` separaretly as well. When using `AndroidBindings` their keys are prefixed with `$xxx` as seen below.
+Note you can use all these `Bindings` separately as well. When using `AndroidBindings` their keys are prefixed with `$xxx` as seen below.
 
-### provided by `AppBindings`
+### `AppBindings`
 
 `AppBindings` provides a couple of values about the app itself:
 
@@ -20,9 +20,9 @@ Note you can use all these `Bindings` separaretly as well. When using `AndroidBi
 ```
 
 
-### provided by `DeviceBindings`
+### `DeviceBindings`
 
-`DeviceBindings` provides some of the values in `android.os.Build`.
+`DeviceBindings` provides some of the values in `android.os.Build`:
 
 ```
 {{ $device.manufacturer }}  : renders the manufacturer of the device
@@ -34,25 +34,36 @@ Note you can use all these `Bindings` separaretly as well. When using `AndroidBi
 {{ $device.build_id }}  : renders the build id of the device
 ```
 
-### provided by `StringBindings`
+### `StringResourceBindings`
 
-`StringBindings` provides access to the string resources of the app
+`StringResourceBindings` provides access to the string resources of the app:
 
 e.g.:
 ```
-{{ $string.app_name }}  : renders the value of the resource `R.string.app_name`
+{{ $R.string.app_name }}  : renders the value of the resource `R.string.app_name`
 ```
 
-### provided by `AppPreferencesBindings`
 
-`AppPreferencesBindings` provides access to `SharePreferences` of the app
+### `IntegerResourceBindings`
+
+`IntegerResourceBindings` provides access to the string resources of the app:
+
+e.g.:
+```
+{{ $R.integer.some_int }}  : renders the integer value of the resource `R.integer.some_int`
+```
+
+
+### `AppPreferencesBindings`
+
+`AppPreferencesBindings` provides access to `SharePreferences` of the app:
 
 e.g.:
 ```
 {{ $prefs.my_prefs.pref1 }}  : renders the value preference `pref1` in the shared preferences file `my_prefs`.
 ```
 
-### provided by `LocaleBindings`
+### `LocaleBindings`
 
 `LocaleBindings` provides access `Locale`
 
@@ -91,7 +102,7 @@ In addition this library provides a few more Bindings for other purposes.
 {{ intent.data }} : renders the data of the intent
 {{ intent.extras.key }} : renders the value of the extra `key`. `intent.extras` contains all the extras of the intent and is iterable. 
 {{ intent.extras["key"] }} : renders the value of the extra `key`. `intent.extras` contains all the extras of the intent and is iterable (alternate notation) 
-{{ intent.categories }} : an iterable of all categories if the intent (in no particular order)
+{{ intent.categories }} : an iterable of all categories of the intent (in no particular order)
 ```
 
 ### `CursorRowBindings`

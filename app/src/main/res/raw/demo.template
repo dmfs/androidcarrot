@@ -5,7 +5,9 @@
 {% block "main" %}
 You're running on a {{ $device.manufacturer }} {{ $device.model }} version {{ $device.version }}.
 
-The "app_name" string has the value "{{ $string.app_name }}"
+A {% if $device.sdk_level >= $R.integer.lollipop %}Lollipop or newer{% else %}pre-Lollipop{% end %} device.
+
+The "app_name" string has the value "{{ $R.string.app_name }}"
 
 Your configured language is {{ $locale.language }} {% if $locale.language!=$locale.language_en %}({{ $locale.language_en }}){% end %}
 
@@ -21,9 +23,14 @@ Extras: {% for key, value in $intent.extras %}{{ key }}
 {% else %}None{% end %}
 Categories: {% for category in $intent.categories %}{{ category }}{% if not loop.last %},{% end %}{% else %}None{% end %}
 Data: {% if $intent.data %}{{ $intent.data }}{% else %}None{% end %}
+
+R.integer.forty_two + 1: {{ $R.integer.forty_two +1 }}
 {% end %}
 
-{% block "footer" %}
-brought to you by dmfs
-{% end %}
+
+
+
+
+
+{% block "footer" %}brought to you by dmfs{% end %}
 

@@ -12,12 +12,12 @@ import au.com.codeka.carrot.Bindings;
  *
  * @author Marten Gajda
  */
-public final class StringBinding implements Bindings
+public final class StringResourceBindings implements Bindings
 {
     private final Context mContext;
 
 
-    public StringBinding(Context context)
+    public StringResourceBindings(Context context)
     {
         mContext = context;
     }

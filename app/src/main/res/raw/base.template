@@ -2,7 +2,5 @@
 ==================
 
 {% block "main" %}{% end %}
-
 ---
-
 {% block "footer" %}{% end %}
