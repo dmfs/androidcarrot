@@ -3,21 +3,24 @@ package org.dmfs.android.carrot.bindings;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import au.com.codeka.carrot.Bindings;
 
 
 /**
  * {@link Bindings} for string resources.
+ * <p>
+ * TODO: support color attributes like `colorPrimary`
  *
  * @author Marten Gajda
  */
-public final class IntegerResourceBindings implements Bindings
+public final class ColorResourceBindings implements Bindings
 {
     private final Context mContext;
 
 
-    public IntegerResourceBindings(Context context)
+    public ColorResourceBindings(Context context)
     {
         mContext = context;
     }
@@ -27,15 +30,15 @@ public final class IntegerResourceBindings implements Bindings
     public Object resolve(@NonNull String key)
     {
         Resources resources = mContext.getResources();
-        int id = resources.getIdentifier(key, "integer", mContext.getPackageName());
-        return id == 0 ? null : resources.getInteger(id);
+        int id = resources.getIdentifier(key, "color", mContext.getPackageName());
+        return id == 0 ? null : ContextCompat.getColor(mContext, id);
     }
 
 
     @Override
     public boolean isEmpty()
     {
-        // we presume there is always at least one integer resource.
+        // we presume there is always at least one color resource.
         return false;
     }
 }

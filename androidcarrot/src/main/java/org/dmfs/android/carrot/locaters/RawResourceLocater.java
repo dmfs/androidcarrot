@@ -17,9 +17,7 @@
 package org.dmfs.android.carrot.locaters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,9 +30,6 @@ import au.com.codeka.carrot.resource.ResourceName;
 
 /**
  * {@link ResourceLocater} for raw Android resources.
- * <p>
- * Note, if the given resource name is numeric, it's treated as a raw resource id, otherwise it's treated as a raw
- * resource name.
  *
  * @author Gabor Keszthelyi
  * @author Marten Gajda
@@ -53,8 +48,7 @@ public final class RawResourceLocater implements ResourceLocater
     @Override
     public ResourceName findResource(@Nullable ResourceName parent, String name) throws CarrotException
     {
-        // Raw resources don't support hierarchies, hence this is the same as #findResource(String).
-        return new RawResourceName(mAppContext, name);
+        return findResource(name);
     }
 
 
@@ -77,40 +71,5 @@ public final class RawResourceLocater implements ResourceLocater
     {
         InputStream inputStream = mAppContext.getResources().openRawResource(Integer.valueOf(resourceName.getName()));
         return new InputStreamReader(inputStream);
-    }
-
-
-    private final class RawResourceName extends ResourceName
-    {
-        private final Context mContext;
-
-
-        RawResourceName(Context context, String name)
-        {
-            super(null, name);
-            mContext = context;
-        }
-
-
-        @Override
-        public String getName()
-        {
-            String name = super.getName();
-            if (!TextUtils.isDigitsOnly(name))
-            {
-                // this is not an id, try to resolve the name to an id
-                Resources resources = mContext.getResources();
-                return String.valueOf(resources.getIdentifier(name, "raw", mContext.getPackageName()));
-            }
-            return name;
-        }
-
-
-        @Nullable
-        @Override
-        public ResourceName getParent()
-        {
-            return null;
-        }
     }
 }

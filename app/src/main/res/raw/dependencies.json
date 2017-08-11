@@ -1,18 +1,16 @@
-{
-  "dependencies": [
-    {
-      "name": "carrot",
-      "url": "https://github.com/codeka/carrot",
-      "license": "apache2",
-      "copyright": "Copyright 2016 Dean Harding, others.",
-      "notes": null
-    },
-    {
-      "name": "iterators",
-      "url": "https://github.com/dmfs/iterators",
-      "license": "apache2",
-      "copyright": "Copyright 2017 dmfs GmbH",
-      "notes": "Iterators - A collection of Iterator implementations.\nCopyright 2017 dmfs GmbH - http://dmfs.org\n\n"
-    }
-  ]
-}
+[
+  {
+    "name": "carrot",
+    "url": "https://github.com/codeka/carrot",
+    "license": "apache2",
+    "copyright": "Copyright 2016 Dean Harding, others.",
+    "notes": null
+  },
+  {
+    "name": "Android Carrot Bindings",
+    "url": "https://github.com/dmfs/androidcarrot",
+    "license": "apache2",
+    "copyright": "Copyright 2017 dmfs GmbH",
+    "notes": "Android Carrot Bindings\nCopyright 2017 dmfs GmbH - http://dmfs.org\n\n"
+  }
+]

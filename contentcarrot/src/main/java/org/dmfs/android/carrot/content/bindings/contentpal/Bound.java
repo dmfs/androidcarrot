@@ -1,4 +1,4 @@
-package org.dmfs.android.carrot.bindings.contentpal;
+package org.dmfs.android.carrot.content.bindings.contentpal;
 
 import org.dmfs.android.contentpal.RowSet;
 import org.dmfs.android.contentpal.RowSnapshot;

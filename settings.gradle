@@ -1,1 +1,1 @@
-include ':app', ':androidcarrot'
+include ':app', ':androidcarrot', ':contentcarrot'

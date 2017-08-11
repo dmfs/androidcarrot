@@ -4,17 +4,19 @@ import android.Manifest;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import org.dmfs.android.carrot.bindings.AndroidBindings;
 import org.dmfs.android.carrot.bindings.IntentBindings;
-import org.dmfs.android.carrot.bindings.contentpal.Bound;
+import org.dmfs.android.carrot.content.bindings.contentpal.Bound;
 import org.dmfs.android.carrot.demo.permissions.BasicAppPermissions;
 import org.dmfs.android.carrot.demo.permissions.Permission;
 import org.dmfs.android.carrot.locaters.RawResourceLocater;
 import org.dmfs.android.contentpal.rowsets.AllRows;
 import org.dmfs.android.contentpal.views.BaseView;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +29,7 @@ import au.com.codeka.carrot.CarrotEngine;
 import au.com.codeka.carrot.CarrotException;
 import au.com.codeka.carrot.Configuration;
 import au.com.codeka.carrot.bindings.Composite;
+import au.com.codeka.carrot.bindings.JsonArrayBindings;
 import au.com.codeka.carrot.bindings.JsonObjectBindings;
 import au.com.codeka.carrot.bindings.SingletonBindings;
 
@@ -62,8 +65,13 @@ public class DemoActivity extends AppCompatActivity
         {
             String templateName = String.valueOf(R.raw.demo);
             String output = engine.process(templateName, new Composite(
-                    new JsonObjectBindings(new JSONObject(fromInputStream(getResources().openRawResource(R.raw.dependencies)))),
-                    new SingletonBindings("$licenses",
+                    new SingletonBindings(
+                            "$dependencies",
+                            new JsonArrayBindings(
+                                    new JSONArray(
+                                            fromInputStream(
+                                                    getResources().openRawResource(R.raw.dependencies))))),
+                            new SingletonBindings("$licenses",
                             new JsonObjectBindings(new JSONObject(fromInputStream(getResources().openRawResource(R.raw.licenses))))),
                     new SingletonBindings("$contacts",
                             // bind an iterable of all contacts in the database
@@ -72,6 +80,7 @@ public class DemoActivity extends AppCompatActivity
                     new AndroidBindings(this),
                     new SingletonBindings("$intent", new IntentBindings(getIntent()))
             ));
+            Log.v("...", output);
             ((TextView) findViewById(R.id.text)).setText(output);
         }
         catch (CarrotException e)
