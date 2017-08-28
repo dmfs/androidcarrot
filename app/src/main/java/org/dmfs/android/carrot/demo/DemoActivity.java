@@ -13,7 +13,7 @@ import org.dmfs.android.carrot.bindings.IntentBindings;
 import org.dmfs.android.carrot.content.bindings.contentpal.Bound;
 import org.dmfs.android.carrot.demo.permissions.BasicAppPermissions;
 import org.dmfs.android.carrot.demo.permissions.Permission;
-import org.dmfs.android.carrot.locaters.RawResourceLocater;
+import org.dmfs.android.carrot.locaters.RawResourceLocator;
 import org.dmfs.android.contentpal.rowsets.AllRows;
 import org.dmfs.android.contentpal.views.BaseView;
 import org.json.JSONArray;
@@ -58,9 +58,7 @@ public class DemoActivity extends AppCompatActivity
 
     public void click(View view) throws IOException, JSONException
     {
-        CarrotEngine engine = new CarrotEngine();
-        Configuration config = engine.getConfig();
-        config.setResourceLocater(new RawResourceLocater(this));
+        CarrotEngine engine = new CarrotEngine(new Configuration.Builder().setResourceLocator(new RawResourceLocator.Builder(this)).build());
         try
         {
             String templateName = String.valueOf(R.raw.demo);
@@ -71,11 +69,11 @@ public class DemoActivity extends AppCompatActivity
                                     new JSONArray(
                                             fromInputStream(
                                                     getResources().openRawResource(R.raw.dependencies))))),
-                            new SingletonBindings("$licenses",
+                    new SingletonBindings("$licenses",
                             new JsonObjectBindings(new JSONObject(fromInputStream(getResources().openRawResource(R.raw.licenses))))),
                     new SingletonBindings("$contacts",
                             // bind an iterable of all contacts in the database
-                            new Bound(new AllRows<>(new BaseView<ContactsContract.Contacts>(this.getContentResolver().acquireContentProviderClient(
+                            new Bound<>(new AllRows<>(new BaseView<ContactsContract.Contacts>(this.getContentResolver().acquireContentProviderClient(
                                     ContactsContract.AUTHORITY_URI), ContactsContract.Contacts.CONTENT_URI)))),
                     new AndroidBindings(this),
                     new SingletonBindings("$intent", new IntentBindings(getIntent()))

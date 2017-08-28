@@ -24,22 +24,23 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import au.com.codeka.carrot.CarrotException;
-import au.com.codeka.carrot.resource.ResourceLocater;
+import au.com.codeka.carrot.Configuration;
+import au.com.codeka.carrot.resource.ResourceLocator;
 import au.com.codeka.carrot.resource.ResourceName;
 
 
 /**
- * {@link ResourceLocater} for raw Android resources.
+ * {@link ResourceLocator} for raw Android resources.
  *
  * @author Gabor Keszthelyi
  * @author Marten Gajda
  */
-public final class RawResourceLocater implements ResourceLocater
+public final class RawResourceLocator implements ResourceLocator
 {
     private final Context mAppContext;
 
 
-    public RawResourceLocater(Context context)
+    public RawResourceLocator(Context context)
     {
         mAppContext = context.getApplicationContext();
     }
@@ -71,5 +72,24 @@ public final class RawResourceLocater implements ResourceLocater
     {
         InputStream inputStream = mAppContext.getResources().openRawResource(Integer.valueOf(resourceName.getName()));
         return new InputStreamReader(inputStream);
+    }
+
+
+    public final static class Builder implements ResourceLocator.Builder
+    {
+        private final Context mContext;
+
+
+        public Builder(Context context)
+        {
+            mContext = context;
+        }
+
+
+        @Override
+        public ResourceLocator build(Configuration config)
+        {
+            return new RawResourceLocator(mContext);
+        }
     }
 }

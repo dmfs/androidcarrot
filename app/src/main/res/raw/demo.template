@@ -39,7 +39,7 @@ Contact names:
           <a href="{{ dependency.url }}">{{ dependency.name }}</a><br />
           <a href="{{ $licenses[dependency.license].url }}">{{ $licenses[dependency.license].name }}</a><br />
           {% if dependency.copyright %}{{ dependency.copyright }}<br />{% end %}
-          {% if dependency.notes %}<pre>{{ dependency.notes }}</pre>{%' }} end %}
+          {% if dependency.notes %}<pre>{{ dependency.notes }}</pre>{% end %}
         </li>
       {% end %}
 </ul>
