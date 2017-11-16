@@ -3,7 +3,6 @@ package org.dmfs.android.carrot.bindings;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import org.dmfs.iterators.Function;
 import org.dmfs.iterators.decorators.Mapped;
 
 import java.util.Iterator;
@@ -46,14 +45,7 @@ public final class BundleBindings implements Bindings, Iterable<EntryBindings>
     @Override
     public Iterator<EntryBindings> iterator()
     {
-        return new Mapped<>(mBundle.keySet().iterator(), new Function<String, EntryBindings>()
-        {
-            @Override
-            public EntryBindings apply(String argument)
-            {
-                return new EntryBindings(argument, decoratedValue(argument));
-            }
-        });
+        return new Mapped<>(mBundle.keySet().iterator(), key -> new EntryBindings(key, decoratedValue(key)));
     }
 
 
