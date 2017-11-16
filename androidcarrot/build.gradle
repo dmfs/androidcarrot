@@ -22,12 +22,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
     compile('au.com.codeka:carrot:2.4.0') {
         exclude group: 'com.google.code.findbugs'
         exclude group: 'org.dmfs' // TODO remove when iterators has been removed from codeka:carrot
     }
-    compile 'org.dmfs:jems:1.13'
+    compile 'org.dmfs:jems:' + JEMS_VERSION
 
     testCompile 'junit:junit:4.12'
 }

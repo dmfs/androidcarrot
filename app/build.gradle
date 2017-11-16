@@ -24,15 +24,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:appcompat-v7:' + SUPPORT_LIBRARY_VERSION
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile project(":androidcarrot")
     compile project(":contentcarrot")
-    compile('com.github.dmfs.ContentPal:contactspal:-SNAPSHOT') {
-        exclude group: 'org.dmfs'
-    }
-    compile ('com.github.dmfs.ContentPal:contentpal:-SNAPSHOT') {
-        exclude group: 'org.dmfs'
-    }
+    compile 'com.github.dmfs.ContentPal:contactspal:' + CONTENTPAL_VERSION
+    compile 'com.github.dmfs.ContentPal:contentpal:' + CONTENTPAL_VERSION
     testCompile 'junit:junit:4.12'
 }
